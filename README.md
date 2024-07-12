@@ -2,6 +2,8 @@
 ## Project Overview
 This project aims to create an interactive dashboard using Streamlit to visualize and analyze price surges in the Nigerian economy. The dashboard will provide insights into various economic indicators and their impact on the economy.
 
+![currency photo](./Media/economy_image.jfif)
+
 **Main Requirements:**
 Check the requirements.txt file for more information.
 * streamlit
