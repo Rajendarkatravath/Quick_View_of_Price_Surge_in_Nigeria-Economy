@@ -32,6 +32,17 @@ if selected == "Introduction":
     also compare the value of Naira and Dollar against these prices.
     """)
 
+    st.subheader('Scope and Approach')
+    st.write("""
+    This project will focus on:
+    - Collecting and analyzing relevant datasets that capture price variations across different sectors.
+    - Conducting exploratory data analysis (EDA) to identify patterns and correlations.
+    - Implementing data visualization techniques to present findings effectively.
+    - Developing predictive models to forecast future price trends and economic indicators.
+    - Incorporating interactive elements into the dashboard to enhance user engagement and understanding.
+    - Providing actionable insights to stakeholders, policymakers, and the general public.
+    """)
+
 elif selected == "EDA":
     st.header("Exploratory Data Analysis")
     # Continue with content for EDA
