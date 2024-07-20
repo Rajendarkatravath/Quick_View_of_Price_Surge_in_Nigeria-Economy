@@ -89,7 +89,7 @@ def plot_debt_unemployment(data):
 with st.sidebar:
     selected = option_menu(
         menu_title="Explore",
-        options=["Introduction", "EDA", "Visualizations", "Consumer Price Index", "GDP"],
+        options=["Introduction", "EDA", "Visualizations", "Consumer Price Index", "GDP", "Contact Us"],
         menu_icon="cast"
     )
 
@@ -197,4 +197,18 @@ elif selected == "Consumer Price Index":
 elif selected == "GDP":
     st.header("GDP Analysis")
     # Continue with content for GDP
+
+elif selected == "Contact Us":
+    st.header("Contact Us")
+    st.image("media/contactus.jpg", width = 500)
+    st.subheader("We'd love to hear from you!")
+    st.write("""
+    Here are the ways you can reach out to our team:
+    
+    - **Email:** [omdenakdnachapter@gmail.com](mailto:omdenakdnachapter@gmail.com)
+    - **Phone:** +234 701 041 2114
+    - **Website:** [Omdena Kaduna Chapter](https://www.omdena.com/local-chapters/kaduna-nigeria-chapter)
+    """)
+
+
 
