@@ -3,6 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from streamlit_option_menu import option_menu
+from catboost import CatBoostRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Lasso
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+import numpy as np
+import os
+import pickle
 
 # Load data
 file_path = 'dataset/1960_onwards.csv'
@@ -194,9 +202,163 @@ elif selected == "Consumer Price Index":
     st.header("Consumer Price Index")
     # Continue with content for Consumer Price Index
 
+    # Load the data
+    data = pd.read_csv(file_path)
+
+    # Define the features and target
+    independent_feature = 'Consumer price index (2010 = 100)'
+    dependent_features = [
+        'GDP (current LCU)', 'Official exchange rate (LCU per US$, period average)', 'Population, total',
+        'Cumulative crude oil production up to and including year', 'Narrow Money', 'Credit to Private Sector',
+        'Demand Deposits', 'Population ages 65 and above (% of total population)', 'Money Supply M2',
+        'Population, female', 'Quasi Money', 'Bank Reserves', 'Livestock production index (2014-2016 = 100)',
+        'Net Foreign Assets', 'GDP (constant LCU)'
+    ]
+
+    X = data[dependent_features]
+    y = data[independent_feature]
+
+    # Split the data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Initialize the CatBoostRegressor
+    model = CatBoostRegressor(verbose=0)
+
+    # Train the model
+    model.fit(X_train, y_train)
+
+    # Save the model to disk
+    pickle.dump(model, open('./model.sav', 'wb'))
+    print("Model saved as 'model.sav'")
+
+    # Load the model from disk
+    model = pickle.load(open('./model.sav', 'rb'))
+
+    # Streamlit app
+    st.title('Consumer Price Index Prediction')
+
+    # Input fields for user to enter feature values
+    inputs = {}
+    for feature in dependent_features:
+        inputs[feature] = st.number_input(f'Enter {feature}', value=0.0)
+
+    # Predict button
+    if st.button('Predict'):
+        # Create a DataFrame for the inputs
+        input_data = pd.DataFrame([inputs])
+
+        # Make prediction
+        prediction = model.predict(input_data)
+
+        # Display the prediction
+        st.write(f'The predicted Consumer Price Index (2010 = 100) is: {prediction[0]}')
+
+  
 elif selected == "GDP":
-    st.header("GDP Analysis")
+   
     # Continue with content for GDP
+
+    # Load your data
+    data = pd.read_csv(file_path)
+
+    # Independent variables
+    independent_vars = [
+        "Year",
+        "Consumer price index (2010 = 100)",
+        "GDP (current LCU)",
+        "Inflation, GDP deflator (annual %)",
+        "Official exchange rate (LCU per US$, period average)",
+        "Total reserves (includes gold, current US$)",
+        "Population, total",
+        "Population ages 15-64 (% of total population)",
+        "Money Supply M3",
+        "Base Money",
+        "Currency in Circulation",
+        "Bank Reserves",
+        "Currency Outside Banks",
+        "Quasi Money",
+        "Other Assets Net",
+        "CBN Bills",
+        "Special Intervention Reserves",
+        "GDPBillions of US $",
+        "Per CapitaUS $",
+        "Petrol Price (Naira)"
+    ]
+
+    # Target variable
+    target_var = "GDP per capita (current US$)"
+
+    # Define features and target
+    X = data[independent_vars]
+    y = data[target_var]
+
+    # Handle missing values (if any)
+    X.fillna(X.mean(), inplace=True)
+    y.fillna(y.mean(), inplace=True)
+
+    # Scale features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Split the data
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+
+    # Create and train the model
+    model = Lasso(alpha=0.1)  # Adjust alpha as needed
+    model.fit(X_train, y_train)
+
+    # Evaluate the model
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+
+    # Save the model and scaler
+    with open('lasso_model.pkl', 'wb') as f:
+        pickle.dump(model, f)
+
+    with open('scaler.pkl', 'wb') as f:
+        pickle.dump(scaler, f)
+
+    # Streamlit app
+    st.title('GDP per Capita Prediction')
+
+    # Input fields for independent variables
+    year = st.number_input('Year')
+    cpi = st.number_input('Consumer price index (2010 = 100)')
+    gdp_lcu = st.number_input('GDP (current LCU)')
+    inflation = st.number_input('Inflation, GDP deflator (annual %)')
+    exchange_rate = st.number_input('Official exchange rate (LCU per US$, period average)')
+    reserves = st.number_input('Total reserves (includes gold, current US$)')
+    population_total = st.number_input('Population, total')
+    population_age_15_64 = st.number_input('Population ages 15-64 (% of total population)')
+    money_supply_m3 = st.number_input('Money Supply M3')
+    base_money = st.number_input('Base Money')
+    currency_in_circulation = st.number_input('Currency in Circulation')
+    bank_reserves = st.number_input('Bank Reserves')
+    currency_outside_banks = st.number_input('Currency Outside Banks')
+    quasi_money = st.number_input('Quasi Money')
+    other_assets_net = st.number_input('Other Assets Net')
+    cbn_bills = st.number_input('CBN Bills')
+    special_intervention_reserves = st.number_input('Special Intervention Reserves')
+    gdp_billions = st.number_input('GDPBillions of US $')
+    per_capita_usd = st.number_input('Per CapitaUS $')
+    petrol_price = st.number_input('Petrol Price (Naira)')
+
+    # Create input data
+    input_data = np.array([[year, cpi, gdp_lcu, inflation, exchange_rate, reserves,
+                            population_total, population_age_15_64, money_supply_m3,
+                            base_money, currency_in_circulation, bank_reserves,
+                            currency_outside_banks, quasi_money, other_assets_net,
+                            cbn_bills, special_intervention_reserves, gdp_billions,
+                            per_capita_usd, petrol_price]])
+
+    # Scale input data
+    input_data_scaled = scaler.transform(input_data)
+
+    # Predict
+    if st.button('Predict GDP per Capita'):
+        prediction = model.predict(input_data_scaled)
+        st.write(f'Predicted GDP per Capita: ${prediction[0]:,.2f}')
+
 
 elif selected == "Contact Us":
     st.header("Contact Us")
