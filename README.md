@@ -1,8 +1,19 @@
 ## Quick View of Price Surge in Nigeria Economy
 ## Project Overview
-This project aims to create an interactive dashboard using Streamlit to visualize and analyze price surges in the Nigerian economy. The dashboard will provide insights into various economic indicators and their impact on the economy.
 
 ![currency photo](./Media/economy_image.jfif)
+
+### Challenge Background
+
+The Nigerian economy has seen a significant surge in prices across various sectors, from daily commodities to services and products available in the markets. This price inflation has impacted the economy differently across states, affecting the living conditions of the citizens. This project aims to analyze key economic indicators such as incomes, expenditures, and savings capabilities of Nigerian citizens in response to this surge.
+
+### The Problem
+
+To create a quick-view dashboard that provides in-depth information on the price surge and its effects on the Nigerian economy using data science techniques.
+
+### Goal of the Project
+
+The goal is to present a graphical view of selected items based on basic living needs, including food items, transportation costs, taxation, wages, healthcare, and essential commodities, and to track their price increases. Additionally, the project aims to compare the value of the Nigerian Naira against the US Dollar and analyze how these prices vary over time.
 
 **Main Requirements:**
 Check the requirements.txt file for more information.
