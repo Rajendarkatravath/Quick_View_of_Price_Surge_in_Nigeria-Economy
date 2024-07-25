@@ -19,7 +19,7 @@ choice = st.sidebar.selectbox("Choose Action:", ["View Local Notebooks"])
 
 if choice == "View Notebooks":
     # List all notebooks in the specified directory
-    notebooks_dir = 'nb/Notebook'
+    notebooks_dir = 'Notebooks'
     if not os.path.exists(notebooks_dir):
         st.error(f"The directory {notebooks_dir} does not exist.")
     else:
