@@ -123,7 +123,7 @@ with st.sidebar:
 
 if selected == "Introduction":
     st.title('Quick View of Price Surge in Nigeria Economy Using Data Science')
-    st.image("media/surge-price.jpg", caption="Economic Overview", use_column_width=True)
+    st.image("./media/surge-price.jpg", caption="Economic Overview", use_column_width=True)
     st.subheader('Challenge Background')
 
     st.write("""
