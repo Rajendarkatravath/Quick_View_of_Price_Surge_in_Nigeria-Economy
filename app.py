@@ -559,7 +559,7 @@ This chart shows unemployment trends for males and females from 2011 to 2021. In
 
 # Continue with content for Consumer Price Index
 elif selected == "Consumer Price Index":
-    st.header("Consumer Price Index")
+  
     # Continue with content for Consumer Price Index
 
     # Load the data
