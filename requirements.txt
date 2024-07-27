@@ -1,12 +1,11 @@
-streamlit
-pandas
-matplotlib
-seaborn
-streamlit-option-menu
-scikit-learn
-catboost
-numpy
-nbconvert
-nbformat
-
+streamlit==1.37.0
+pandas==2.2.2
+matplotlib==3.9.1
+seaborn==0.13.2
+streamlit-option-menu==0.3.13
+scikit-learn==1.5.1
+catboost==1.2.5
+numpy==1.23.5
+nbconvert==7.16.4
+nbformat==5.10.4
 
