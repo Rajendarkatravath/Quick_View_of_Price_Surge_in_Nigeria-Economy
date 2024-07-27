@@ -744,7 +744,7 @@ elif selected == "Notebook Viewer":
 
 elif selected == "Contact Us":
     st.header("Contact Us")
-    st.image("media/contactus.jpg", width = 500)
+    st.image("./Media/contactus.jpg", width = 500)
     st.subheader("We'd love to hear from you!")
     st.write("""
     Here are the ways you can reach out to our team:
