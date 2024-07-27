@@ -8,5 +8,5 @@ catboost
 numpy
 nbconvert
 nbformat
-pickle
+
 
