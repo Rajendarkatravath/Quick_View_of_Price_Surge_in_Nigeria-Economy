@@ -123,7 +123,7 @@ with st.sidebar:
 
 if selected == "Introduction":
     st.title('Quick View of Price Surge in Nigeria Economy Using Data Science')
-    st.image("./media/surge-price.jpg", caption="Economic Overview", use_column_width=True)
+    st.image("./Media/surge-price.jpg", caption="Economic Overview", use_column_width=True)
     st.subheader('Challenge Background')
 
     st.write("""
@@ -216,7 +216,7 @@ elif selected == "EDA":
 
     st.subheader('Download the Entire Report:')
 
-    with open("media/eda_report.pdf", "rb") as pdf_file:
+    with open("./Media/eda_report.pdf", "rb") as pdf_file:
         PDFbyte = pdf_file.read()
     
     st.download_button(
